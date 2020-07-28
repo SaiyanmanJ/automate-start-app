@@ -2,12 +2,12 @@
 @Author: SaiyanmanJ
 @Date: 2020-07-28 11:41:11
 @LastEditors: SaiyanmanJ
-@LastEditTime: 2020-07-28 17:26:15
+@LastEditTime: 2020-07-28 17:53:22
 @FilePath: \automate-start-app\autoStartApp.py
 @Description: app gui
 '''
 
-import function 
+import path_func 
 import tkinter as tk
 import time
 
@@ -16,7 +16,7 @@ import time
 
 # time.sleep(delay_time)
 
-function.start_app()
+path_func.start_app()
 
 # 设置窗口属性
 window = tk.Tk()
@@ -36,7 +36,7 @@ entry.pack()
 def add_path():
     path = entry.get()
     if len(path) > 0:
-        if function.add_app_path(path):
+        if path_func.add_app_path(path):
             var.set("path has added") # 设置 label 提示
             entry.delete(0,200) # 清空 entry 的值
             show_app() # 更新app信息
@@ -56,13 +56,13 @@ lb = tk.Listbox(window)
 # 展示app信息
 def show_app():
     lb.delete(0, "end")
-    for app_name in function.get_app_name():
+    for app_name in path_func.get_app_name():
         lb.insert("end", app_name)
 # 删除app信息
 def delete_app():
     app_name = lb.get(lb.curselection()) # 获取鼠标选中的文本
     lb.delete(lb.curselection()) # 删除 listbox 中的文本
-    function.delete_app_path(app_name) # 删除 app_path.json 中的文本
+    path_func.delete_app_path(app_name) # 删除 app_path.json 中的文本
 
 show_app()
 lb.pack()
