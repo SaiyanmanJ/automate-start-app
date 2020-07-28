@@ -1,11 +1,12 @@
 '''
 @Author: SaiyanmanJ
-@Date: 2020-07-27 17:20:18
-@LastEditTime: 2020-07-28 11:11:36
-@LastEditors: Please set LastEditors
-@Description: automate start app
-@FilePath: \automate_start_app\AutomateStart.py
+@Date: 2020-07-28 11:41:11
+@LastEditors: SaiyanmanJ
+@LastEditTime: 2020-07-28 12:44:38
+@FilePath: \automate-start-app\AutomateStart.py
+@Description: 添加文件的程序
 '''
+
 import subprocess
 import json
 import time
@@ -42,9 +43,9 @@ def add_app_path(path):
         name_begin = path.rfind("\\")
         
         if name_begin != -1:
-            app_name = path[name_begin + 1:]
+            app_name = path[name_begin + 1: path.rfind(".")]
         else:
-            app_name = path[path.rfind("/") + 1:]    
+            app_name = path[path.rfind("/") + 1: path.rfind(".")]    
     
         if len(app_name) > 0:
             jsonData[app_name] = path # 添加路径信息
@@ -53,10 +54,28 @@ def add_app_path(path):
         
     return False
             
-def get_app_path():
+# 返回程序的名称
+def get_app_name():
     with open('app_path.json', 'r', encoding='utf8') as f:
         jsonData = json.load(f)
-        return jsonData        
+
+        app_name = []
+        for k, v in jsonData.items():
+            app_name.append(k)
+        return app_name 
+
+# 删除 app 信息
+
+def delete_app_path(app_name):
+
+    jsonData = json.load(open('app_path.json','r'))
+    
+    with open('app_path.json', 'w', encoding='utf8') as f:
+        if app_name in jsonData:
+            del jsonData[app_name]
+            json.dump(jsonData, f)
+            return True
+    return False
 
 # 打开程序路径信息文件，启动程序
 def start_app():
@@ -64,7 +83,7 @@ def start_app():
         jsonData = json.load(f)
         for k, v in jsonData.items():
             time.sleep(start_interval) # 推迟执行 单位秒
-            if process_exist(k): # 判断程序是否已经启动
+            if process_exist(k + ".exe"): # 判断程序是否已经启动
                 add_log(k + " is runing")
             else:
                 try:
