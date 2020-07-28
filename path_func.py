@@ -2,8 +2,8 @@
 @Author: SaiyanmanJ
 @Date: 2020-07-28 11:41:11
 @LastEditors: SaiyanmanJ
-@LastEditTime: 2020-07-28 17:27:35
-@FilePath: \automate-start-app\function.py
+@LastEditTime: 2020-07-28 18:10:55
+@FilePath: \automate-start-app\path_func.py
 @Description: 添加文件的程序
 '''
 
@@ -14,8 +14,7 @@ import psutil
 import tkinter
 from pathlib import Path
 
-# 程序启动间隔单位秒
-start_interval = 1
+
 
 # 判断进程是否在运行函数
 def process_exist(process_name):
@@ -85,6 +84,9 @@ def delete_app_path(app_name):
             json.dump(jsonData, f)
             return True
     return False
+
+# 程序启动间隔单位秒
+start_interval = 3
 
 # 打开程序路径信息文件，启动程序
 def start_app():
