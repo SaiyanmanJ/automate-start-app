@@ -2,7 +2,7 @@
 @Author: SaiyanmanJ
 @Date: 2020-07-28 11:41:11
 @LastEditors: SaiyanmanJ
-@LastEditTime: 2020-07-28 15:37:23
+@LastEditTime: 2020-07-28 17:26:15
 @FilePath: \automate-start-app\autoStartApp.py
 @Description: app gui
 '''
@@ -12,9 +12,9 @@ import tkinter as tk
 import time
 
 # 开机自启动后多久启动app
-delay_time = 1
+# delay_time = 1
 
-time.sleep(delay_time)
+# time.sleep(delay_time)
 
 function.start_app()
 
@@ -31,6 +31,25 @@ label.pack()
 # 输入框
 entry = tk.Entry(window,show=None,width = 100)
 entry.pack()
+
+# 添加路径
+def add_path():
+    path = entry.get()
+    if len(path) > 0:
+        if function.add_app_path(path):
+            var.set("path has added") # 设置 label 提示
+            entry.delete(0,200) # 清空 entry 的值
+            show_app() # 更新app信息
+        else:
+            var.set("error, please check path")
+    else:
+        var.set("please input path")
+    
+
+# 添加按钮
+add_button = tk.Button(window, text = 'add app', width = 15, height = 2, command = add_path)
+add_button.pack()
+
 
 # listbox 展示程序名称
 lb = tk.Listbox(window)
@@ -50,25 +69,8 @@ lb.pack()
 
 
 
-# 添加路径
-def add_path():
-    path = entry.get()
-    if len(path) > 0:
-        if function.add_app_path(path):
-            var.set("path has added") # 设置 label 提示
-            entry.delete(0,200) # 清空 entry 的值
-            show_app() # 更新app信息
-        else:
-            var.set("error, please check path")
-    else:
-        var.set("please input path")
-    
-
-# 添加按钮
-add_button = tk.Button(window, text = 'add', width = 15, height = 2, command = add_path)
-add_button.pack()
 # 删除按钮
-del_button = tk.Button(window, text = 'delete', width = 15, height = 2, command=delete_app)
+del_button = tk.Button(window, text = 'delete app', width = 15, height = 2, command=delete_app)
 del_button.pack()
 
 

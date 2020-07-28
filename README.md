@@ -10,5 +10,6 @@ now, just test on windows
 * 2.为autoStartApp.exe 创建快捷方式
 * 3.将快捷方式放到 C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp 目录下
 ## 功能
-* 增加，删除 app 信息功能
-* 开机自启动app
+* 增加，删除 app
+* 检测 app 路径是否合法
+* 设置自启动后开机自启动app

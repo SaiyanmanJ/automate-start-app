@@ -2,8 +2,8 @@
 @Author: SaiyanmanJ
 @Date: 2020-07-28 11:41:11
 @LastEditors: SaiyanmanJ
-@LastEditTime: 2020-07-28 14:35:31
-@FilePath: \automate-start-app\AutomateStart.py
+@LastEditTime: 2020-07-28 17:27:35
+@FilePath: \automate-start-app\function.py
 @Description: 添加文件的程序
 '''
 
@@ -33,7 +33,7 @@ def add_log(info):
 # 添加 app 路径
 def add_app_path(path):
 
-    # 查看路径是否存在
+    # 查看路径是否存在 
     if not Path(path).exists():
         return False
         
@@ -65,6 +65,15 @@ def get_app_name():
             app_name.append(k)
         return app_name 
 
+# 返回app路径
+def get_app_path(app_name):
+    with open('app_path.json', 'r', encoding='utf8') as f:
+        jsonData = json.load(f)
+
+        for k, v in jsonData.items():
+            if k == app_name:
+                return v
+    return "" 
 # 删除 app 信息
 def delete_app_path(app_name):
 
@@ -79,7 +88,7 @@ def delete_app_path(app_name):
 
 # 打开程序路径信息文件，启动程序
 def start_app():
-    with open('auto_start_app.json', 'r', encoding='utf8') as f:
+    with open('app_path.json', 'r', encoding='utf8') as f:
         jsonData = json.load(f)
         for k, v in jsonData.items():
             time.sleep(start_interval) # 推迟执行 单位秒
@@ -91,3 +100,34 @@ def start_app():
                 except FileNotFoundError: # 路径错误，文件不存在
                     add_log(k + " is not found")
      
+#-------------------------------------------------------------
+# 暂时无用
+
+# 将需要自启动的app加入到 auto_start_app.json 中
+def add_auto_start_app(app_name):
+    
+    # 读取文件数据
+    jsonData = json.load(open('auto_start_app.json','r'))
+    # 获取app路径
+    path = get_app_path(app_name)
+
+    # 写回文件
+    with open('app_start_app.json', 'w', encoding='utf8') as f:
+        
+        if len(app_name) > 0:
+            jsonData[app_name] = path # 添加路径信息
+            json.dump(jsonData, f) # 写入数据
+            return True
+    return False
+
+# 删除 自启动app
+def delete_auto_start_app(app_name):
+    jsonData = json.load(open('auto_start_app.json','r'))
+    
+    with open('auto_start_app.json', 'w', encoding='utf8') as f:
+        if app_name in jsonData:
+            del jsonData[app_name]
+            json.dump(jsonData, f)
+            return True
+    return False
+
