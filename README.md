@@ -2,7 +2,7 @@
  * @Author: SaiyanmanJ
  * @Date: 2020-07-28 11:40:48
  * @LastEditors: SaiyanmanJ
- * @LastEditTime: 2020-07-28 18:28:05
+ * @LastEditTime: 2020-07-31 00:00:11
  * @FilePath: \automate-start-app\README.md
  * @Description: 
 --> 
@@ -10,7 +10,7 @@
 now, just test on windows
 
 ## 状态
-当前打包测试成功
+使用 pyinstaller 打包成exe，设置自启动可能会出现无法运行的错误，还未解决
 下一步：考虑用复选框选择自启动的app，当前只能全部自启动，不能选择
 
 ## 设置自启动
