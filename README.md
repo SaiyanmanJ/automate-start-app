@@ -1,11 +1,3 @@
-<!--
- * @Author: SaiyanmanJ
- * @Date: 2020-07-28 11:40:48
- * @LastEditors: SaiyanmanJ
- * @LastEditTime: 2020-08-02 23:18:49
- * @FilePath: \automate-start-app\README.md
- * @Description: 
---> 
 # automate-start-app
 now, just test on windows
 
